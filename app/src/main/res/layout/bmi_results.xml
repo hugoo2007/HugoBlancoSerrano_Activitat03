@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
+        android:layout_weight="1">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bmi_results"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/dark_blue"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="BMI Results"
+                    android:textColor="@color/white"
+                    android:textSize="45sp"
+                    android:textStyle="bold">
+                </TextView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/your_results_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Your Results"
+            android:textColor="@color/white"
+            android:textSize="150sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/bmi_results">
+        </TextView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/results"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="25dp"
+            app:cardBackgroundColor="@color/marine_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/your_results_text"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NORMAL"
+                    android:textColor="@color/green"
+                    android:textSize="85sp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="85dp"
+                    android:text="22.43"
+                    android:textColor="@color/white"
+                    android:textSize="250sp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Normal"
+                    android:textColor="@color/white"
+                    android:textSize="50sp"
+                    android:textStyle="bold">
+                </TextView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="0"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/strong_purple"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="55dp"
+                android:text="RE-CALCULATE"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold">
+            </TextView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>
