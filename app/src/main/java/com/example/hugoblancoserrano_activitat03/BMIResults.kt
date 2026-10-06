@@ -22,6 +22,8 @@ class BMIResults : AppCompatActivity() {
             insets
         }
 
+        //Aquí estem definint de nou les variables, únicament que, aquest cop no ho fem
+        //al inici, si no que ho fem tan d'hora com les necessitem.
         val gender = intent.getBooleanExtra(MainActivity.EXTRA_GEN, false)
         val height = intent.getStringExtra(MainActivity.EXTRA_HEIGHT)!!
         val weight = intent.getStringExtra(MainActivity.EXTRA_WEIGHT)!!
@@ -35,17 +37,27 @@ class BMIResults : AppCompatActivity() {
 
         val bottomClassification = findViewById<TextView>(R.id.bottomClassification)
 
+        //------------------------------------------------------------------------------------------------------
+
+        //Aquí, bàsicament, li estem dient que volem fer un càlcul bassant-nos en les polzades,
+        //multiplicades per 0.0254 per convertirles a metres, dividint el nostre pes amb elles.
         val calculate: (weight: Double, inches: Double) -> Double = {weight, height ->
             weight / (height * 0.0254).pow(2)
         }
 
+        //Un cop fet, le assignem al nostre TextView de resultat.
         result.text = "%.2f".format(calculate(weight.toDouble(), height.toDouble()))
 
+        //Aquí, estem creant un intent de nou, pero aquet cop per a tornar enrere, i així encarregar-nos
+        //d'oferir a l'usuari un intent de tornar a crear el seu propi BMI Result.
         reCalculate.setOnClickListener{it: View ->
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
+        //Aquí, bàsicament, estem assignant una categoría al nostre resultat, segons que
+        //tan prims, obessos o equil·librats estem. Amb l'if, comprovem el valor i segons el que obtinguem,
+        //agafem un string que tenim definit al nostre xml, i un color que tenim d'igual manera.
         val toCheck = result.text.toString().toDouble()
         if(toCheck < 18.5) {
             classification.text = getString(R.string.skinny)

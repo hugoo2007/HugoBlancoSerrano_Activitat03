@@ -79,7 +79,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="85dp"
+                    android:layout_marginTop="85dp"
+                    android:layout_marginBottom="85dp"
                     android:text="@string/_22_43"
                     android:textColor="@color/white"
                     android:textSize="55sp"

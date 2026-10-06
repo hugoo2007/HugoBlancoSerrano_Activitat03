@@ -37,13 +37,16 @@ class MainActivity : AppCompatActivity() {
     var isMale: Boolean = false
     var isFemale: Boolean = false
 
+    //Definim aquest companion object, per a fer les claus dels intents més segures.
     companion object {
         const val EXTRA_GEN = "extra_gen"
         const val EXTRA_HEIGHT = "extra_height"
         const val EXTRA_WEIGHT = "extra_weight"
         const val EXTRA_AGE = "extra_age"
-    } //Definim aquest companion object, per a fer les claus dels intents més segures.
+    }
 
+    //Això, bàsicament, li està indicant a la nostra app, que es el que volem carregar
+    //tan sovint com es faci la creació de l'aplicacio.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -75,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //----------------------------------------------------------------------------------------------------
-        /*Aquí bàsicament fem el mateix pero per els botons, fent sumes i restes dels valors
+        /*Aquí bàsicament fem el mateix pero per als botons, fent sumes i restes dels valors
         cada cop que es prem el botó de sumar o restar, sempre comprovant que no sigui 0 o superior al limit
         d'edat o pes.
         */
@@ -105,11 +108,15 @@ class MainActivity : AppCompatActivity() {
             ageNumber.text = if(checkLimits(ageNumber, false)) (numberParsed - 1).toString() else 0.toString()
         }
 
-        /*Fem el binding, que es la propietat que ens deixa accedir als xml, o millor dit,
-        a les seves propietats.*/
+        //!! Aquestes funcions, fan servir una altre que es trobarà definida més a sota,
+        //més comentada es clar!!!.
+
+        /*Fem el binding (encara no es pot), així que agafem l'element que volem que faci el canvi d'activity.*/
         calculateButton=findViewById<CardView>(R.id.calculate)
         calculateButton.setOnClickListener (::changeView)
     }
+
+    //--------------------------------------------------------------------------------------------
 
     /*Aquí, bàsicament estem dient que fer cada cop que es premi un dels valors
     corresponents al botó que s'ha pulsat. Alterna bàsicament, el color d'aquests
@@ -129,11 +136,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //Aquí, bàsicament, estem definint la funció, que serà l'encarregada de fer que no puguem
+    //sumar ni restar més dels límits. D'aquesta manera, evitem sobrecalculs i valors negatius./*
     fun checkLimits(field: TextView, increment: Boolean): Boolean {
         val numberParsed: Int = field.text.toString().toInt()
         return increment && numberParsed < 150 || !increment && numberParsed > 0
     }
 
+    //Resumidament, estem definint l'intent. Que es una propietat que ens permet realitzar
+    //el canvi d'ativitats.
     fun changeView(it: View) {
         val intent = Intent(this, BMIResults::class.java).apply {
             putExtra(EXTRA_GEN, isMale)
@@ -142,7 +153,7 @@ class MainActivity : AppCompatActivity() {
             putExtra(EXTRA_AGE, ageNumber.text)
         }
         startActivity(intent)
-        //Val, aquí li estem dient que, des d'aquesta activitat, que fa referencia this, volem cambiar a la classe/activitat BMIResults.
+        //Val, aquí li estem dient que, des d'aquesta activitat, que fa referència this, volem canviar a la classe/activitat BMIResults.
         //Un cop que tenim definida dita acció, fem el canvi.
     }
 }
