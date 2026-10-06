@@ -34,7 +34,7 @@
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="B &amp; O BMI Calculator"
+                    android:text="@string/b_amp_o_bmi_calculator"
                     android:textSize="20sp">
                 </TextView>
             </LinearLayout>
@@ -62,14 +62,15 @@
                 <ImageView
                     android:layout_width="104dp"
                     android:layout_height="99dp"
-                    android:src="@drawable/male_icon">
+                    android:src="@drawable/male_icon"
+                    android:contentDescription="@string/male_icon">
                 </ImageView>
 
                 <TextView
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male"
+                    android:text="@string/male"
                     android:textSize="24sp">
                 </TextView>
             </LinearLayout>
@@ -99,14 +100,14 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/female_icon"
-                    android:contentDescription="female-icon">
+                    android:contentDescription="@string/female_icon">
                 </ImageView>
 
                 <TextView
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"
+                    android:text="@string/female"
                     android:textSize="24sp">
                 </TextView>
             </LinearLayout>
@@ -135,7 +136,7 @@
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="HEIGHT"
+                    android:text="@string/height"
                     android:textSize="24sp">
                 </TextView>
 
@@ -149,7 +150,7 @@
                         android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="73"
+                        android:text="@string/_0"
                         android:textSize="42sp"
                         android:id="@+id/inchesNumber">
                     </TextView>
@@ -158,7 +159,7 @@
                         android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="inches"
+                        android:text="@string/inches"
                         android:textSize="24sp">
                     </TextView>
                 </LinearLayout>
@@ -196,7 +197,7 @@
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="WEIGHT"
+                    android:text="@string/weight"
                     android:textSize="24sp">
                 </TextView>
 
@@ -204,8 +205,8 @@
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="42dp"
+                    android:text="@string/_02"
+                    android:textSize="42sp"
                     android:id="@+id/weightNumbers">
                 </TextView>
 
@@ -261,7 +262,7 @@
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AGE"
+                    android:text="@string/age"
                     android:textSize="24sp">
                 </TextView>
 
@@ -269,8 +270,8 @@
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="42dp"
+                    android:text="@string/_03"
+                    android:textSize="42sp"
                     android:id="@+id/ageNumbers">
                 </TextView>
 
@@ -323,7 +324,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="CALCULATE"
+                android:text="@string/calculate"
                 android:textSize="20sp">
             </TextView>
         </LinearLayout>

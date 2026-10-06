@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">HugoBlancoSerrano_Activitat03</string>
+    <string name="normal">NORMAL</string>
+    <string name="fat">FAT</string>
+    <string name="skinny">SKINNY</string>
+    <string name="b_amp_o_bmi_calculator"><![CDATA[B & O BMI Calculator]]></string>
+    <string name="male">Male</string>
+    <string name="female_icon">female-icon</string>
+    <string name="female">Female</string>
+    <string name="height">HEIGHT</string>
+    <string name="_0">0</string>
+    <string name="inches">inches</string>
+    <string name="weight">WEIGHT</string>
+    <string name="_02">0</string>
+    <string name="age">AGE</string>
+    <string name="_03">0</string>
+    <string name="calculate">CALCULATE</string>
+    <string name="male_icon">Male Icon</string>
+    <string name="bmi_results">BMI Results</string>
+    <string name="your_results">Your Results</string>
+    <string name="_22_43">22.43</string>
+    <string name="re_calculate">RE-CALCULATE</string>
 </resources>

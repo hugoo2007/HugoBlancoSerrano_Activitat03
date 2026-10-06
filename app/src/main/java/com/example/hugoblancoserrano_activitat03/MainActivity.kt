@@ -1,19 +1,19 @@
 package com.example.hugoblancoserrano_activitat03
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.provider.CalendarContract
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.slider.Slider
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,8 +21,9 @@ class MainActivity : AppCompatActivity() {
     farem servir quan volguem programar els comportaments d'aquestes
     propietats. Lateint el que fa es esperarse a que es defineixi el valor d'aquestes
     per a que no siguin null i no exploti res. */
-    lateinit var male_card: MaterialCardView
-    lateinit var female_card: MaterialCardView
+    lateinit var calculateButton: CardView
+    lateinit var maleCard: MaterialCardView
+    lateinit var femaleCard: MaterialCardView
     lateinit var inches: Slider
     lateinit var inchesNumber: TextView
     lateinit var weightNumber: TextView
@@ -34,7 +35,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var weightSumButton: Button
     lateinit var weightRestButton: Button
     var isMale: Boolean = false
-    var isFemale: Boolean = false;
+    var isFemale: Boolean = false
+
+    companion object {
+        const val EXTRA_GEN = "extra_gen"
+        const val EXTRA_HEIGHT = "extra_height"
+        const val EXTRA_WEIGHT = "extra_weight"
+        const val EXTRA_AGE = "extra_age"
+    } //Definim aquest companion object, per a fer les claus dels intents més segures.
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -45,16 +54,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        //---------------------------------------------------------------------------------------------------
+
         /*Assignem per id els camps del layout, indicant quina mena de camp retorna la cerca als <>*/
-        male_card = findViewById<MaterialCardView>(R.id.seleccio_home)
-        female_card = findViewById<MaterialCardView>(R.id.seleccio_dona)
+        maleCard = findViewById<MaterialCardView>(R.id.seleccio_home)
+        femaleCard = findViewById<MaterialCardView>(R.id.seleccio_dona)
 
-        male_card.setOnClickListener(::cardClick)
-
-        female_card.setOnClickListener(::cardClick)
+        maleCard.setOnClickListener(::cardClick)
+        femaleCard.setOnClickListener(::cardClick)
 
         inches = findViewById<Slider>(R.id.slider_inches)
         inchesNumber = findViewById<TextView>(R.id.inchesNumber)
+
+        //---------------------------------------------------------------------------------------------------
         /*Afegim un event que indica que en quant es faci un canvi al scroll, activi aquest event,
         que bàsicament agafa el valor del slider i el parseja a string per mostrar-lo al text numéric.
         */
@@ -62,6 +74,7 @@ class MainActivity : AppCompatActivity() {
             inchesNumber.text = "%.1f".format(it.value)
         }
 
+        //----------------------------------------------------------------------------------------------------
         /*Aquí bàsicament fem el mateix pero per els botons, fent sumes i restes dels valors
         cada cop que es prem el botó de sumar o restar, sempre comprovant que no sigui 0 o superior al limit
         d'edat o pes.
@@ -69,47 +82,67 @@ class MainActivity : AppCompatActivity() {
         weightNumber = findViewById<TextView>(R.id.weightNumbers)
         weightSumButton = findViewById<Button>(R.id.summonButtonWeight)
         weightRestButton = findViewById<Button>(R.id.restButonWeight)
+
         weightSumButton.setOnClickListener { it: View ->
             val numberParsed: Int = weightNumber.text.toString().toInt()
-            weightNumber.text = if(numberParsed < 250) (numberParsed + 1).toString() else 250.toString()
+            weightNumber.text = if(checkLimits(weightNumber, true)) (numberParsed + 1).toString() else 250.toString()
         }
         weightRestButton.setOnClickListener{it: View ->
             val numberParsed = weightNumber.text.toString().toInt()
-            weightNumber.text = if(numberParsed > 0) (numberParsed -1).toString() else 0.toString()
+            weightNumber.text = if(checkLimits(weightNumber, false)) (numberParsed -1).toString() else 0.toString()
         }
 
         ageNumber = findViewById<TextView>(R.id.ageNumbers)
         ageSumButton = findViewById<Button>(R.id.summonButtonAge)
+
         ageRestButton = findViewById<Button>(R.id.restButonAge)
         ageSumButton.setOnClickListener { it: View ->
             val numberParsed: Int = ageNumber.text.toString().toInt()
-            ageNumber.text = if(numberParsed < 150) (numberParsed + 1).toString() else 150.toString()
+            ageNumber.text = if(checkLimits(ageNumber, true)) (numberParsed + 1).toString() else 150.toString()
         }
         ageRestButton.setOnClickListener { it: View ->
             val numberParsed: Int = ageNumber.text.toString().toInt()
-            ageNumber.text = if(numberParsed > 0) (numberParsed - 1).toString() else 0.toString()
+            ageNumber.text = if(checkLimits(ageNumber, false)) (numberParsed - 1).toString() else 0.toString()
         }
+
+        /*Fem el binding, que es la propietat que ens deixa accedir als xml, o millor dit,
+        a les seves propietats.*/
+        calculateButton=findViewById<CardView>(R.id.calculate)
+        calculateButton.setOnClickListener (::changeView)
     }
 
     /*Aquí, bàsicament estem dient que fer cada cop que es premi un dels valors
     corresponents al botó que s'ha pulsat. Alterna bàsicament, el color d'aquests
     comparant les referències a cada onclick.
     */
-    fun cardClick(it: View): Unit {
-        if(it == male_card) {
-            female_card.setCardBackgroundColor(  ContextCompat.getColor(this, R.color.marine_blue))
-            male_card.setCardBackgroundColor(Color.GREEN)
+    fun cardClick(it: View) {
+        if(it == maleCard) {
+            femaleCard.setCardBackgroundColor(  ContextCompat.getColor(this, R.color.marine_blue))
+            maleCard.setCardBackgroundColor(Color.GREEN)
             isMale=true
             isFemale=false
         } else {
-            male_card.setCardBackgroundColor(ContextCompat.getColor(this, R.color.marine_blue))
-            female_card.setCardBackgroundColor(Color.GREEN)
+            maleCard.setCardBackgroundColor(ContextCompat.getColor(this, R.color.marine_blue))
+            femaleCard.setCardBackgroundColor(Color.GREEN)
             isFemale=true
             isMale=false
         }
     }
 
-    fun changeInches(it: Slider, value: Float, fromUser: Boolean) {
+    fun checkLimits(field: TextView, increment: Boolean): Boolean {
+        val numberParsed: Int = field.text.toString().toInt()
+        return increment && numberParsed < 150 || !increment && numberParsed > 0
+    }
 
+    fun changeView(it: View) {
+        val intent = Intent(this, BMIResults::class.java).apply {
+            putExtra(EXTRA_GEN, isMale)
+            putExtra(EXTRA_HEIGHT, inchesNumber.text)
+            putExtra(EXTRA_WEIGHT, weightNumber.text)
+            putExtra(EXTRA_AGE, ageNumber.text)
+        }
+        startActivity(intent)
+        //Val, aquí li estem dient que, des d'aquesta activitat, que fa referencia this, volem cambiar a la classe/activitat BMIResults.
+        //Un cop que tenim definida dita acció, fem el canvi.
     }
 }
