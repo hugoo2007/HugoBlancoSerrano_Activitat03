@@ -63,39 +63,43 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:text="@string/normal"
                     android:textColor="@color/green"
                     android:textSize="35sp"
                     android:textStyle="bold"
-                    android:id="@+id/classification">
+                    android:id="@+id/classification"
+                    android:layout_weight="1"
+                    android:gravity="top">
                 </TextView>
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="85dp"
-                    android:layout_marginBottom="85dp"
+                    android:layout_height="0dp"
                     android:text="@string/_22_43"
                     android:textColor="@color/white"
                     android:textSize="55sp"
                     android:textStyle="bold"
-                    android:id="@+id/result">
+                    android:id="@+id/result"
+                    android:layout_weight="2"
+                    android:gravity="center">
                 </TextView>
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:text="@string/normal"
                     android:textColor="@color/white"
                     android:textSize="25sp"
                     android:textStyle="bold"
-                    android:id="@+id/bottomClassification">
+                    android:id="@+id/bottomClassification"
+                    android:layout_weight="1"
+                    android:gravity="bottom">
                 </TextView>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
